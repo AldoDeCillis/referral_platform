@@ -7,9 +7,9 @@ use App\Services\EncryptionService;
 
 class FrontController extends Controller
 {
-    public function __construct(EncryptionService $encryptionService)
+    public function __construct(EncryptionService $es)
     {
-        $this->encryptionService = $encryptionService;
+        $this->es = $es;
     }
 
     public function home()
@@ -17,15 +17,22 @@ class FrontController extends Controller
         return view('welcome');
     }
 
+    public function reservedArea()
+    {
+        return view('reserved-area');
+    }
+
     public function referrerRegister($hashed_id)
     {
-        // $seller = User::findOrFail($this->encryptionService->decrypt($hashed_seller_id));
+        $referrer = User::findOrFail($this->es->decrypt($hashed_id));
 
-        return view('referrer.register', compact('hashed_id'));
+        return $referrer->id == $this->es->decrypt($hashed_id) ? view('referrer.register', compact('hashed_id')) : abort(404);
     }
 
     public function refereeRegister($hashed_id)
     {
-        return view('referee.register', compact('hashed_id'));
+        $referrer = User::findOrFail($this->es->decrypt($hashed_id));
+
+        return $referrer->id == $this->es->decrypt($hashed_id) ? view('referee.register', compact('hashed_id')) : abort(404);
     }
 }

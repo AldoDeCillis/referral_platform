@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [FrontController::class, 'home'])->name('home');
+    Route::get('/reserved-area', [FrontController::class, 'reservedArea'])->name('reserved-area');
 });
 
 // Referrer Registration

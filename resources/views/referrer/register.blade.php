@@ -80,19 +80,16 @@
                             @enderror
                         </div>
                     </div>
-                    {{-- <div class="-mx-3 mb-2 flex flex-wrap">
-                        <div class="mb-6 w-full px-3 md:mb-0 md:w-1/2">
-                            <label class="text-s mb-2 block tracking-wide text-white" for="city_selected_value">
-                                Città<span class="text-red-300">*</span>
-                            </label>
-                            <div class="relative w-full">
-                                <input class="@error('city_id') border-red-500 @enderror block w-full appearance-none rounded-3xl border bg-white px-4 py-3 leading-tight text-gray-700" id="city_search" name="city_id" placeholder="Città" type="text" value="{{ old('city_id') }}">
-                                @error('city_id')
-                                    <p class="text-xs italic text-red-300">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                    </div> --}}
+                    <div class="mb-6 w-full px-3" id="city_wrapper">
+                        <label class="text-s mb-2 block tracking-wide text-white" for="city">
+                            Città<span class="text-red-300">*</span>
+                        </label>
+                        <input id="city_id" name="city_id" type="hidden" value="{{ old('city_id') }}">
+                        <input class="block w-full appearance-none rounded-3xl border bg-white px-4 py-3 leading-tight text-gray-700" id="city" name="city" type="text">
+                        @error('city_id')
+                            <p class="text-xs italic text-red-300">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="-mx-3 mb-6 flex flex-wrap justify-center">
                         <div class="-mx-3 mb-6 flex w-full justify-center px-3">
                             <div class="mt-6 flex w-full justify-center px-3">
@@ -106,5 +103,5 @@
             </div>
         </div>
     </div>
-    {{-- <x-footer /> --}}
+    @vite(['resources/js/citySearch.js'])
 </x-layout>

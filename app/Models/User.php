@@ -3,11 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Laravel\Sanctum\HasApiTokens;
 use App\Services\EncryptionService;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -26,6 +26,10 @@ class User extends Authenticatable
         'city',
         'province',
         'region',
+        'crm_status',
+        'crm_id',
+        'crm_sync_errors',
+        'cmr_synced_at',
         'password',
         'referrer_id',
     ];
@@ -49,6 +53,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function referrer()
+    {
+        return $this->belongsTo(User::class, 'referrer_id');
+    }
+
+    public function referees()
+    {
+        return $this->hasMany(User::class, 'referrer_id');
+    }
 
     public function getReferralLinkAttribute()
     {
