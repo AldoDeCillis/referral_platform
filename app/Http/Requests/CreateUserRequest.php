@@ -28,11 +28,6 @@ class CreateUserRequest extends FormRequest
             $this->merge(['already_referred' => true]);
         }
         $this->merge(['referrer_id' => $decryptedId]);
-
-        // $url = url()->previous();
-        // $route = app('router')->getRoutes()->match(app('request')->create($url));
-        // $routeParameterId = array_key_exists('hashed_id', $route->parameters) ? $es->decrypt($route->parameters['hashed_id']) : null;
-        // $this->merge(['url_parameter_id' => $routeParameterId]);
     }
 
     /**
@@ -60,7 +55,6 @@ class CreateUserRequest extends FormRequest
             'already_referred' => ['sometimes', 'declined'],
             'city_id' => ['sometimes', 'required'],
         ];
-        // 'url_parameter_id' => ['same:referrer_id'],
     }
 
     public function messages(): array
@@ -68,7 +62,6 @@ class CreateUserRequest extends FormRequest
         return [
             'password_confirmation.same' => 'Le password non corrispondono',
             'already_referred.declined' => 'Sei già stato referenziato da '.$this->referrer->name.' '.$this->referrer->surname,
-            // 'url_parameter_id.same' => 'Woops, C\'è un problema con il tuo link. Riprova più tardi',
         ];
     }
 }

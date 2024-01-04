@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\ApiCallService;
 use App\Services\EncryptionService;
 
 class FrontController extends Controller
 {
+    public $es;
+
     public function __construct(EncryptionService $es)
     {
         $this->es = $es;
@@ -29,7 +32,7 @@ class FrontController extends Controller
         return $referrer->id == $this->es->decrypt($hashed_id) ? view('referrer.register', compact('hashed_id')) : abort(404);
     }
 
-    public function refereeRegister($hashed_id)
+    public function refereeRegister($hashed_id, ApiCallService $apiCallService)
     {
         $referrer = User::findOrFail($this->es->decrypt($hashed_id));
 

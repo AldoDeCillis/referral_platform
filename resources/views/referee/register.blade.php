@@ -59,7 +59,7 @@
                                 <p class="text-xs italic text-red-300">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="mb-6 w-full px-3" id="city_wrapper">
+                        <div class="mb-6 w-full px-3 relative" id="city_wrapper">
                             <label class="text-s mb-2 block tracking-wide text-white" for="city">
                                 Città<span class="text-red-300">*</span>
                             </label>

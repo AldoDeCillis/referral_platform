@@ -42,6 +42,7 @@ cityInput.addEventListener("input", (e) => {
                     "text-sm"
                 );
                 cityElement.textContent = city.name;
+                cityList.classList.add("absolute", "w-[100%]", "mt-2", "rounded-xl", "overflow-y-hidden");
                 cityList.appendChild(cityElement);
                 cityElement.addEventListener("click", () => {
                     cityHiddenInput.value = city.id;
@@ -49,7 +50,6 @@ cityInput.addEventListener("input", (e) => {
                     cityList.remove();
                 });
             });
-            console.log(e.target.value);
             cityWrapper.appendChild(cityList);
         });
     }, 300);

@@ -19,9 +19,8 @@ class UserController extends Controller
 
     public function refereeRegister($hashed_id, CreateUserRequest $request)
     {
-        $user = UserRepository::create($request);
-        $user->update(['crm_status' => 'referee']);
-        dd($user);
+        $payload = UserRepository::create($request);
+        $payload->update(['crm_status' => 'referee']);
 
         return redirect()->route('home')->with('userCreated', 'l\'utente è stato correttamente creato');
     }
